@@ -1,0 +1,138 @@
+{
+  "name": "mcdonalds-data-agent",
+  "description": "Access McDonald's data and manage orders through MCP",
+  "version": "1.0.0",
+  "tools": [
+    {
+      "name": "get_account",
+      "description": "Get the user's McDonald's account information including name, email, phone, and membership status",
+      "inputSchema": {
+        "type": "object",
+        "properties": {}
+      }
+    },
+    {
+      "name": "get_menu",
+      "description": "Get all available menu items from McDonald's",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "type": "string",
+            "description": "Optional: Filter by category (e.g., 'burgers', 'chicken', 'drinks')"
+          }
+        }
+      }
+    },
+    {
+      "name": "search_menu",
+      "description": "Search for menu items by keyword",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "keyword": {
+            "type": "string",
+            "description": "Search keyword (e.g., 'burger', 'fries', 'chicken')"
+          }
+        },
+        "required": ["keyword"]
+      }
+    },
+    {
+      "name": "get_orders",
+      "description": "Get user's order history",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "limit": {
+            "type": "integer",
+            "description": "Number of recent orders to retrieve (default: 10)"
+          }
+        }
+      }
+    },
+    {
+      "name": "get_order",
+      "description": "Get details of a specific order",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "order_id": {
+            "type": "string",
+            "description": "The order ID"
+          }
+        },
+        "required": ["order_id"]
+      }
+    },
+    {
+      "name": "place_order",
+      "description": "Place a new order at McDonald's",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "items": {
+            "type": "array",
+            "description": "List of items to order",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Menu item ID"
+                },
+                "quantity": {
+                  "type": "integer",
+                  "description": "Quantity to order"
+                },
+                "customizations": {
+                  "type": "object",
+                  "description": "Optional customizations"
+                }
+              },
+              "required": ["id", "quantity"]
+            }
+          }
+        },
+        "required": ["items"]
+      }
+    },
+    {
+      "name": "get_loyalty_points",
+      "description": "Get user's loyalty points balance and reward options",
+      "inputSchema": {
+        "type": "object",
+        "properties": {}
+      }
+    },
+    {
+      "name": "get_stores",
+      "description": "Get nearby McDonald's stores",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "latitude": {
+            "type": "number",
+            "description": "User's latitude"
+          },
+          "longitude": {
+            "type": "number",
+            "description": "User's longitude"
+          },
+          "radius": {
+            "type": "integer",
+            "description": "Search radius in kilometers"
+          }
+        }
+      }
+    },
+    {
+      "name": "get_summary",
+      "description": "Get a comprehensive summary of account status and recent orders",
+      "inputSchema": {
+        "type": "object",
+        "properties": {}
+      }
+    }
+  ]
+}
